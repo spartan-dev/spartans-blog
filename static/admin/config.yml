@@ -1,6 +1,6 @@
 backend:
-  name: kainmaligno
-  repo: kainmaligno/spartans-repo 
+  name: github
+  repo: kainmaligno/spartans-blog 
 
 media_folder: static/assets
 public_folder: assets
