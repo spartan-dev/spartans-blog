@@ -1,13 +1,16 @@
 import React from "react"
 import { Link } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Button from "../components/button"
 
 class IndexPage extends React.Component {
   render() {
-    const siteTitle = "Gatsby Starter Personal Website"
+    const siteTitle = "Spartans Crypt for code sagas  "
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -15,11 +18,34 @@ class IndexPage extends React.Component {
           title="Home"
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
-        <img style={{ margin: 0 }} src="./GatsbyScene.svg" alt="Gatsby Scene" />
+        <StaticQuery
+        query={bigFront}
+        render={ data => {
+          console.log(data)
+          return(
+            <Container>
+                <Img
+              fluid={data.logo.childImageSharp.fluid}
+              alt="spartans logo"
+              style={{
+                marginBottom: 0,
+                width:300,
+                height:300,
+               
+              }}
+              imgStyle={{
+                borderRadius: `50%`,
+              }}
+            />
+            </Container>
+          )
+        }}
+        />
+        {/* <img style={{ margin: 0 }} src="./GatsbyScene.svg" alt="Gatsby Scene" /> */}
         <h1>
-          Hey people{" "}
+          Hey spartans{" "}
           <span role="img" aria-label="wave emoji">
-            👋
+            👋 
           </span>
         </h1>
         <p>Welcome to your new Gatsby website. You are on your home page.</p>
@@ -35,5 +61,21 @@ class IndexPage extends React.Component {
     )
   }
 }
+
+const bigFront = graphql`
+query spartan{
+  logo: file(absolutePath:{regex:"/spartansLogo.png/"}){
+    childImageSharp {
+      fluid(maxWidth:800){
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+}
+`
+
+const Container = styled.div`
+  display: flex;
+`
 
 export default IndexPage
